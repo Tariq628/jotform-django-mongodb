@@ -12,11 +12,6 @@
                 var h2Element = $("<h2>").text("{{ data.title}}");
                 $('#form').append(h2Element);
                 {% for key, question_data in data.questions.items %}
-                
-                    //console.log("Key:", "{{ key }}");
-                    //console.log("Type:", "{{ question_data.0.type }}");
-                    //console.log("Value:", "{{ question_data.0.value }}");
-
                     if ( "{{ question_data.0.type }}" == "input"){
                         
                         var h3Element = $("<h3>").text("{{ question_data.0.value }}");
@@ -33,7 +28,7 @@
                     }
                     else if ( "{{ question_data.0.type }}" == "select"){
                         
-                        var h3Element = $("<h3>").text("Courses");
+                        var h3Element = $("<h3>").text("{{ question_data.0.field }}");
                         $('#form').append(h3Element);
 
                         var selectElement = document.createElement('select');
@@ -72,46 +67,33 @@
             {% endif %}
 
             $("#save").click(function() {
-                alert("Button Clicked!");
                 const answer = {};
                 var final_data = {};
                 // You can perform additional actions here
                 element = document.getElementById('form');
-                
-                // Get all form elements within the div
+               
                 var allDivs = element.getElementsByTagName('div');
 
-                // Extract and log the IDs of the forms
                 var allDivs = Array.from(allDivs).map(function (allDivs) {
                     return allDivs.id;
                 });
 
                 var quesCount=1;
                 for ( var i = 0; i < allDivs.length; i++ ) {
-                    
                     var parentElement = document.getElementById(allDivs[i]);
-                    var elementsInsideDiv = parentElement.querySelectorAll('*');
-
-                    console.log("inside div",elementsInsideDiv);
-                    // Iterate through the NodeList and get the IDs
+                   
+                    var elementsInsideDiv = parentElement.querySelectorAll('*:not(option)');
+                
                     var ids = [];
                     var questionSet = [];
-                    for (var j = 0; j < elementsInsideDiv.length; j=j+2) {
-                        var element = elementsInsideDiv[j];
-                        console.log("this is it",elementsInsideDiv[j].tagName);
-
-                        var key  = elementsInsideDiv[j].innerHTML.toLowerCase().replace(/ /g, '_');
-
-                        if( elementsInsideDiv[j].tagName =="OPTION"){
-                            console.log("me selecgt hun", elementsInsideDiv[j]);
-                        }
-
-                        var value = elementsInsideDiv[j+1].value ;
-                        
+                    var elementsArray = [...elementsInsideDiv];
+                    for (var j = 0; j < elementsArray.length; j=j+2) {
+                        var element = elementsArray[j];
+                        var key  = element.innerHTML.toLowerCase().replace(/ /g, '_');
+                        var value = elementsArray[j + 1].value;
+            
                         answer[key] = value;
                     }
-                    
-                
                     quesCount = quesCount+1;
                 }
                 final_data["app_id"] = 118;

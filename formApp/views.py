@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 import uuid
 
 connection_string = 'mongodb://localhost:27017'
+client = MongoClient(connection_string)
+db = client.jotform
 
 
 def index(request):
@@ -21,9 +23,8 @@ def save_data(request):
 
             unique_form_id = str(uuid.uuid4())
             data["form_id"] = unique_form_id
-            client = MongoClient(connection_string)
-            db = client.jotform
-            collection = db.form
+
+            collection = db["form"]
 
             # document = {'key': 'value'}
             collection.insert_one(data)
@@ -41,19 +42,17 @@ def save_data(request):
 
 
 def form_template(request):
-    client = MongoClient(connection_string)
-    db = client.jotform
-    collection = db.form
+    collection = db['form']
     cursor = collection.find()
     documents = list(cursor)
-
+    print(documents)
     return render(request, 'formtemplates.html', {"data": documents})
 
 
 def your_redirect_view(request, form_id):
     client = MongoClient(connection_string)
     db = client.jotform
-    collection = db.form
+    collection = db["form"]
     result = collection.find_one({"form_id": form_id})
 
     return render(request, 'form.html', {"data": result})
@@ -68,7 +67,7 @@ def save_response(request):
             data["form_id"] = unique_form_id
             client = MongoClient(connection_string)
             db = client.jotform
-            collection = db.Responses
+            collection = db["Responses"]
 
             collection.insert_one(data)
 

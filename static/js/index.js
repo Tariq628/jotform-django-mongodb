@@ -18,7 +18,6 @@ $(document).ready(function () {
 
         if (tagLabelValue == "input") {
             html = `<div id=${divCount}><label>Field Label:</label>
-                    <input type='text' name='user_name' placeholder='Enter a field label'>
                     <input type='text' id='question-${count}' name='quest' placeholder='Enter a Question?'>
                     <input type='text'></div>`;
             
@@ -28,7 +27,7 @@ $(document).ready(function () {
         }
         else if (tagLabelValue == "select") {
             html = `<div id=${divCount} tag-type="select"><label>Field Label:</label>
-                    <input type='text' name='field2' placeholder='Enter a field label'>
+                    <input type='text' id='select-field' name='field2' placeholder='Enter a field label'>
                     <input type='text' id='question-${count}' name='field2' placeholder='Enter a field Values comma Separated'>
                     </div>`;
             $('#select-values').show();
@@ -130,7 +129,6 @@ $(document).ready(function () {
 
                 var questionSet = [];
 
-
                 //getting ids of inside div elements
                 for (var j = 0; j < ids.length; j++) {
 
@@ -163,13 +161,15 @@ $(document).ready(function () {
 
                 var options = [];
                 //getting ids of inside div elements
-                for (var j = 0; j < ids.length; j++) {
+                for (var j = 1; j < ids.length; j++) {
                     options.push(document.getElementById(ids[j]).value);
                 }
                 var Obj = {};
                 Obj["type"] = "select";
+                Obj["field"] = document.getElementById("select-field").value
                 Obj["value"] = options;
                 questionSet.push(Obj);
+               
 
                 questions['question' + quesCount] = questionSet;
                 quesCount = quesCount + 1;
