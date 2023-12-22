@@ -1,21 +1,27 @@
-body {
-    font-family: Arial, sans-serif;
+.center {
+    margin: auto;
+    width: 50%;
+    border: 3px solid lightblue;
+    padding: 10px;
+    margin-top: 100px;
 }
 
-.template-box {
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin: 10px;
-    width: 300px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
+.container {
+    position: relative;
+    height: 300px;
+    /* Set the height of your container */
+    border: 1px solid #ccc;
+
 }
 
-h2 {
-    color: #333;
-}
+b1 {
+    position: absolute;
+    top: 10px;
+    /* Adjust the top position as needed */
+    right: 10px;
+    /* Adjust the right position as needed */
+    background-color: #a8db84;
+    color: white;
 
-p {
-    color: #666;
+
 }
