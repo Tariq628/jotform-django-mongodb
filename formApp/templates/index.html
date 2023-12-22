@@ -1,55 +1,50 @@
+{% extends "base.html" %}
+
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Django App</title>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="{% static "css/index.css" %}">
+{% block css_link %}
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+{% endblock css_link %}
 
-</head>
-<body>
-    <div class="center">
-        <h1>Basic Dynamic Form Demo</h1>
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">Basic Dynamic Form Demo</h1>
         
-            <form id="form_create">
-                <label>
-                    <input type="checkbox" name="options[]" tag_label="input" value="option1">
-                    Text Field
-                </label>
-            
-                <label>
-                    <input type="checkbox" name="options[]" tag_label="select" value="option2">
-                    Dropdown
-                </label>
-            
-                <label>
-                    <input type="checkbox" name="options[]" tag_label="description" value="option3">
-                    Text Area
-                </label>
-
-                <label>
-                    <input type="checkbox" name="options[]" tag_label="button" value="option4">
-                    Button
-                </label>
-                
-            </form>
-            <div class="container">
-                <button id="add_field" class="b1" type="button">Add</button>
-                <a id="templates" class="template" href="{% url 'form_template' %}">
-                    <button type="button">All Templates</button>
-                </a>
-            <div>
-            <button type="button" id="submitBtn">Create Form</button>
-            <div id="dynamic_form">
+        <form id="form_create">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="options[]" tag_label="input" value="option1">
+                <label class="form-check-label">Text Field</label>
             </div>
-            <button type="button" id="addSubField" style="display: none;">+</button>
-            <button type="button" id="select-values" style="display: none;">Add Select Values</button>
+            
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="options[]" tag_label="select" value="option2">
+                <label class="form-check-label">Dropdown</label>
+            </div>
+            
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="options[]" tag_label="description" value="option3">
+                <label class="form-check-label">Text Area</label>
+            </div>
 
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="options[]" tag_label="button" value="option4">
+                <label class="form-check-label">Button</label>
+            </div>
+        </form>
+
+        <div class="container">
+            <button id="add_field" class="btn btn-primary" type="button">Add</button>
+            <a id="templates" class="template" href="{% url 'form_template' %}">
+                <button class="btn btn-secondary" type="button">All Templates</button>
+            </a>
+        </div>
+
+        <button type="button" class="btn btn-success" id="submitBtn">Create Form</button>
+        <div id="dynamic_form"></div>
+        <button type="button" class="btn btn-info" id="addSubField" style="display: none;">+</button>
+        <button type="button" class="btn btn-warning" id="select-values" style="display: none;">Add Select Values</button>
     </div>
+{% endblock content %}
 
+{% block js_link %}
 <script src="{% static "js/index.js" %}"></script>
-
-</body>
-</html>
+{% endblock js_link %}
