@@ -6,7 +6,15 @@
 {% endblock css_link %}
 
 
-{% block content %}{% endblock content %}
+{% block content %}
+<h1>Your Template Preview</h1>
+
+{% for template in data %}
+    <div class="template-box" id="template-{{ forloop.counter }}" form-id=`{{ template.form_id }}`>
+        <h3>{{ template.title }}</h3>
+    </div>
+{% endfor %}
+{% endblock content %}
 
     
 
