@@ -18,7 +18,7 @@ def save_data(request):
         try:
             # Assuming you are sending JSON data
             data = json.loads(request.body)
-            
+
             unique_form_id = str(uuid.uuid4())
             data["form_id"] = unique_form_id
             client = MongoClient(connection_string)
