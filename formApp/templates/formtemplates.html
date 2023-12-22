@@ -1,0 +1,59 @@
+
+<!-- template_preview.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .template-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #fff;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Your Template Preview</h1>
+
+{% for template in data %}
+    <div class="template-box" id="template-{{ forloop.counter }}" form-id=`{{ template.form_id }}`>
+        <h3>{{ template.title }}</h3>
+    </div>
+{% endfor %}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.template-box').click(function() {
+            // Get the ID of the clicked div
+            var id = $(this).attr('form-id');
+            id = id.replace(/^`|`$/g, '');
+            
+            var url = "{% url 'your_redirect_view' form_id="PLACEHOLDER" %}".replace('PLACEHOLDER', id);
+           
+            window.location.href = url;
+        });
+    });
+</script>
+</body>
+</html>
+
