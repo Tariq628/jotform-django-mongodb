@@ -8,66 +8,57 @@ $(document).ready(function () {
 
     $('#add_field').on('click', function () {
         var tagLabelValue = $('input[name="options[]"]:checked').attr('tag_label');
-        console.log(divCount);
-        if (divCount == 1) {
+        
+        if (tagLabelValue && divCount == 1) {
 
-            var html = `<div id='form-id'><h3>Form Title</h3><input type='text' id='form-title' name='' placeholder='Enter Title?'></div>`;
+            html = `<div id='form-id'><h3>Form Title</h3><input type='text' id='form-title' name='' placeholder='Enter Title?'></div>`;
             parentHtml = document.getElementById('dynamic_form').innerHTML + html;
-            console.log(parentHtml);
             $('#dynamic_form').html(parentHtml);
         }
 
         if (tagLabelValue == "input") {
-            var html = `<div id=${divCount}><label>Field Label:</label>
+            html = `<div id=${divCount}><label>Field Label:</label>
                     <input type='text' name='user_name' placeholder='Enter a field label'>
                     <input type='text' id='question-${count}' name='quest' placeholder='Enter a Question?'>
                     <input type='text'></div>`;
-            console.log(count);
+            
             count = count + 1;
             divCount = divCount + 1;
             $('#addSubField').show();
         }
         else if (tagLabelValue == "select") {
-            var html = `<div id=${divCount} tag-type="select"><label>Field Label:</label>
+            html = `<div id=${divCount} tag-type="select"><label>Field Label:</label>
                     <input type='text' name='field2' placeholder='Enter a field label'>
                     <input type='text' id='question-${count}' name='field2' placeholder='Enter a field Values comma Separated'>
                     </div>`;
             $('#select-values').show();
-            console.log(count);
             count = count + 1;
             divCount = divCount + 1;
         }
         else if (tagLabelValue == "description") {
-            var html = `<div id=${divCount}><label>Field Label:</label>
+            html = `<div id=${divCount}><label>Field Label:</label>
                     <input type='text' id='question-${count}' name='field3' placeholder='Enter a field label'>
                     <textarea name="myTextarea" rows="4" cols="50">
                     Enter your text here...
                     </textarea></div>`;
-            console.log(count);
             count = count + 1;
             divCount = divCount + 1;
         }
         else if (tagLabelValue == "button") {
-            var html = `<div id=${divCount}><button type="button">Create Form</button></div>`;
-            console.log(count);
+            html = `<div id=${divCount}><button type="button">Create Form</button></div>`;
             count = count + 1;
             divCount = divCount + 1;
         }
         $('input[name="options[]"]:checked').prop('checked', false);
-        console.log(document.getElementById('dynamic_form').innerHTML);
+        
         parentHtml = document.getElementById('dynamic_form').innerHTML + html;
-        console.log('======', document.getElementById('dynamic_form').innerHTML);
-        console.log("==------", parentHtml, html);
-
-
-
+      
         $('#dynamic_form').html(parentHtml);
 
     });
 
     $('#select-values').on('click', function () {
-        console.log("fefe");
-        var html = `<input type='text' id='question-${count}' name='options' placeholder='Enter value?'>`;
+        html = `<input type='text' id='question-${count}' name='options' placeholder='Enter value?'>`;
 
         var select_element = $('div[tag-type="select"]');
 
@@ -76,15 +67,13 @@ $(document).ready(function () {
 
     $('#addSubField').on('click', function () {
         var divElement = document.getElementById('dynamic_form');
-        console.log(count);
+      
         if (divElement.lastChild.childNodes[2].tagName.toLowerCase() == "input") {
-            console.log('her v r');
             var inputElement = document.createElement('input');
             inputElement.type = 'text';
             inputElement.id = `question-${count}`;
             inputElement.placeholder = 'Enter text';
             divElement.lastChild.appendChild(inputElement);
-            console.log(count);
             count = count + 1;
         }
         else if (tagLabelValue == "select") {
