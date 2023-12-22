@@ -31,12 +31,10 @@
             </div>
         </form>
 
-        <div class="container">
-            <button id="add_field" class="btn btn-primary" type="button">Add</button>
-            <a id="templates" class="template" href="{% url 'form_template' %}">
-                <button class="btn btn-secondary" type="button">All Templates</button>
-            </a>
-        </div>
+        <button id="add_field" class="btn btn-primary" type="button">Add</button>
+        <a id="templates" class="template" href="{% url 'form_template' %}">
+            <button class="btn btn-secondary" type="button">All Templates</button>
+        </a>
 
         <button type="button" class="btn btn-success" id="submitBtn">Create Form</button>
         <div id="dynamic_form"></div>

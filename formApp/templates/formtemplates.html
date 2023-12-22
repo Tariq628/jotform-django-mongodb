@@ -10,8 +10,11 @@
 <h1>Your Template Preview</h1>
 
 {% for template in data %}
-    <div class="template-box" id="template-{{ forloop.counter }}" form-id=`{{ template.form_id }}`>
-        <h3>{{ template.title }}</h3>
+    <div class="card mb-3 template-box clickable" id="template-{{ forloop.counter }}" form-id="{{ template.form_id }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ template.title }}</h5>
+            <!-- You can add more content or styling as needed -->
+        </div>
     </div>
 {% endfor %}
 {% endblock content %}
