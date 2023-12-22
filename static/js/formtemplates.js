@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    $('.template-box').click(function () {
-        var id = $(this).attr('form-id').replace(/^`|`$/g, '');
-        
+    $('.clickable').click(function () {
+        var id = $(this).attr('form-id');
         var url = `/your_redirect_view/${id}`;
-
         window.location.href = url;
-    })
-})
+    });
+});
