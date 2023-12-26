@@ -16,6 +16,7 @@ $(document).ready(function () {
         for (var i = 0; i < tagLabelValue.length; i++) {
            
             if (tagLabelValue && divCount == 1) {
+                $('#submitBtn').show();
                 html = `<div id='form-id' class='mb-3'><h3 class='mb-3'>Form Title</h3><input type='text' class='form-control' id='form-title' name='' placeholder='Enter Title?'  autocomplete="off"></div>`;
                 parentHtml = document.getElementById('dynamic_form').innerHTML + html;
                 $('#dynamic_form').html(parentHtml);
@@ -52,8 +53,8 @@ $(document).ready(function () {
                 divCount = divCount + 1;
             }
             
-            parentHtml = document.getElementById('dynamic_form').innerHTML + html;
-            $('#dynamic_form').html(parentHtml);
+            parentHtml = html;
+            $('#dynamic_form').append(parentHtml);
         }
         $('input[name="options[]"]:checked').prop('checked', false);
 
@@ -99,6 +100,26 @@ $(document).ready(function () {
     // After clicking on submit button this will take type, value and if
     // there is a select than field key is also added.
     document.getElementById('submitBtn').addEventListener('click', function () {
+        var isEmpty = false;
+
+        $("input[type='text'], textarea").each(function() {
+            if ($(this).val().trim() === "") {
+                isEmpty = true;
+                // Add a red border or other visual indication for empty fields
+                $(this).css("border", "1px solid red");
+            } else {
+                // Reset the border for non-empty fields
+                $(this).css("border", "1px solid #ccc");
+            }
+
+        });
+
+        // If any field is empty, prevent form submission
+        if (isEmpty) {
+            event.preventDefault(); // Prevent form submission
+            return;
+        }
+
         $('#select-values').hide();
         final_data = {};
         const questions = {};
@@ -216,6 +237,7 @@ $(document).ready(function () {
 
         // Remove all HTML content inside the element
         formIdElement.innerHTML = '';
+        $('#submitBtn').hide();
 
         //save data in database by calling the api 
         fetch('save-data/', {

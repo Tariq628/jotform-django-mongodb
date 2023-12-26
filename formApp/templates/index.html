@@ -28,7 +28,7 @@
         </form>
 
         <button id="add_field" class="btn btn-primary" type="button">Add</button>
-        <button type="button" class="btn btn-success" id="submitBtn">Create Form</button>
+        {% comment %} <button type="button" class="btn btn-success" id="submitBtn">Create Form</button> {% endcomment %}
         <a id="templates" class="template" href="{% url 'form_template' %}">
             <button class="btn btn-secondary" type="button">All Templates</button>
         </a>
@@ -36,6 +36,7 @@
         <div id="dynamic_form"></div>
         {% comment %} <button type="button" class="btn btn-info" id="addSubField" style="display: none;">+</button> {% endcomment %}
         <button type="button" class="btn btn-warning" id="select-values" style="display: none;">Add Select Values</button>
+        <button type="button" class="btn btn-success" id="submitBtn" style="display: none;">Create Form</button>
     </div>
 {% endblock content %}
 
