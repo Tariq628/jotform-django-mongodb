@@ -45,11 +45,10 @@ def form_template(request):
     collection = db['form']
     cursor = collection.find()
     documents = list(cursor)
-    print(documents)
     return render(request, 'formtemplates.html', {"data": documents})
 
 
-def your_redirect_view(request, form_id):
+def form_view(request, form_id):
     client = MongoClient(connection_string)
     db = client.jotform
     collection = db["form"]

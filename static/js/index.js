@@ -5,7 +5,7 @@ var html = '';
 const formData = {};
 
 $(document).ready(function () {
-
+    //Home - User can add fields by clicking on checked boxes
     $('#add_field').on('click', function () {
         var tagLabelValue = [];
         $('input[name="options[]"]:checked').each(function() {
@@ -59,7 +59,7 @@ $(document).ready(function () {
 
     });
 
-
+    //Add extra options field if the parent field is select
     $('#select-values').on('click', function () {
         html = `<input type='text' class='form-control' id='question-${count}' name='options' placeholder='Enter Option'>`;
       
@@ -72,7 +72,7 @@ $(document).ready(function () {
         count = count + 1;
     });
 
-
+    // add subfields with in the input field but it is commented out
     $('#addSubField').on('click', function () {
         var divElement = document.getElementById('dynamic_form');
         
@@ -96,19 +96,20 @@ $(document).ready(function () {
         $('input[name="options[]"]:checked').prop('checked', false);
     });
 
-
+    // After clicking on submit button this will take type, value and if
+    // there is a select than field key is also added.
     document.getElementById('submitBtn').addEventListener('click', function () {
         $('#select-values').hide();
         final_data = {};
         const questions = {};
 
-        // Get the div element by its ID
+        // Get the form div element by its ID
         var divElement = document.getElementById('dynamic_form');
 
         // Get all form elements within the div
         var allDivs = divElement.getElementsByTagName('div');
 
-        // Extract and log the IDs of the forms
+        // Extract the IDs of the forms
         var allDivs = Array.from(allDivs).map(function (allDivs) {
             return allDivs.id;
         });
@@ -116,7 +117,6 @@ $(document).ready(function () {
         var quesCount = 1;
         for (var i = 1; i < allDivs.length; i++) {
 
-            // Find the div by id
             var parentDiv = document.getElementById(allDivs[i]);
 
             var selectElement = parentDiv.getAttribute('tag-type');
@@ -125,7 +125,7 @@ $(document).ready(function () {
                 var parentDiv = document.getElementById(allDivs[i]);
                 var elementsInsideDiv = parentDiv.querySelectorAll('*');
 
-                // Iterate through the NodeList and get the IDs
+                // Iterate through the NodeList and get the sub element IDs
                 var ids = [];
                 for (var j = 0; j < elementsInsideDiv.length; j++) {
 
@@ -138,7 +138,6 @@ $(document).ready(function () {
 
                 var questionSet = [];
 
-                //getting ids of inside div elements
                 for (var j = 0; j < ids.length; j++) {
 
                     var Obj = {
@@ -157,7 +156,7 @@ $(document).ready(function () {
                 var parentDiv = document.getElementById(allDivs[i]);
                 var elementsInsideDiv = parentDiv.querySelectorAll('*');
 
-                // Iterate through the NodeList and get the IDs
+                // Iterate through the NodeList and get the element IDs
                 var ids = [];
                 for (var j = 0; j < elementsInsideDiv.length; j++) {
                     var element = elementsInsideDiv[j];
@@ -218,6 +217,7 @@ $(document).ready(function () {
         // Remove all HTML content inside the element
         formIdElement.innerHTML = '';
 
+        //save data in database by calling the api 
         fetch('save-data/', {
             method: 'POST',
             headers: {
